@@ -6,16 +6,19 @@ import Show from "./Show";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
-  const SAVING = "SAVING"
-  const CONFIRM = "CONFIRM"
-  const DELETING = "DELETING"
-  const EDIT = "EDIT"
+  const SAVING = "SAVING";
+  const CONFIRM = "CONFIRM";
+  const DELETING = "DELETING";
+  const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -27,15 +30,20 @@ export default function Appointment(props) {
       interviewer,
     };
     transition("SAVING");
-    props.bookInterview(props.id, interview).then(() => { transition("SHOW") });
+    props.bookInterview(props.id, interview)
+      .then(() => { transition("SHOW") })
+      .catch(error => transition(ERROR_SAVE, true));
   }
-  function confirm() {
+  function destroy() {
     transition("DELETING");
-    props.cancelInterview(props.id).then(() => { transition("EMPTY") });
+    props.cancelInterview(props.id)
+      .then(() => { transition("EMPTY") })
+      .catch(error => transition(ERROR_DELETE, true));
   }
 
   return (
     <article className="appointment">
+      <Header time={props.time} />
       {mode === EMPTY && (
         <Empty
           onAdd={() => {
@@ -43,8 +51,17 @@ export default function Appointment(props) {
           }}
         />
       )}
-      <Header time={props.time} />
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save appointment."
+          onClose={back}
+        />
 
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not cancel appointment."
+          onClose={back}
+        />
+      )}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
@@ -58,7 +75,7 @@ export default function Appointment(props) {
         />
       )}
       {mode === CONFIRM && (
-        <Confirm onConfirm={confirm} onCancel={back} />
+        <Confirm onConfirm={destroy} onCancel={back} />
       )}
 
       {mode === CREATE && (
