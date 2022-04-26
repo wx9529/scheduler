@@ -17,8 +17,6 @@ export default function Form(props) {
   };
 
   function save() {
-    console.log("student = ", student);
-    console.log("interviewer = ", interviewer);
     props.onSave(student, interviewer);
   }
 
@@ -31,6 +29,7 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
+            data-testid="student-name-input"
             value={student}
             onChange={(event) => setStudent(event.target.value)}
           />
