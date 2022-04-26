@@ -27,6 +27,19 @@ export default function useApplicationData() {
 
   const setDay = (day) => setState({ ...state, day });
 
+  function updateSpots(addspot) {
+    const dayOfWeek = state.days.findIndex(item => item.name === state.day)
+    console.log('state', state);
+
+    const day = {
+      ...state.days[dayOfWeek],
+      spots: state.days[dayOfWeek].spots + (addspot ? 1 : -1)
+    }
+
+    const days = [...state.days];
+    days[dayOfWeek] = { ...day };
+    return days;
+  }
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -36,20 +49,8 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    //
-    const dayOfWeek = state.days.findIndex(item => item.name === state.day)
-    console.log('state', state);
-    let day = {
-      ...state.days[dayOfWeek],
-    }
 
-    day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots - 1
-    }
-
-    let days = state.days
-    days[dayOfWeek] = day;
+    const days = updateSpots(false)
 
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
@@ -58,7 +59,6 @@ export default function useApplicationData() {
           appointments,
           days
         }));
-
       })
   }
 
@@ -71,16 +71,7 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    const dayOfWeek = state.days.findIndex(item => item.name === state.day)
-
-    const day = {
-      ...state.days[dayOfWeek],
-      spots: state.days[dayOfWeek].spots + 1
-    }
-
-    let days = state.days
-    days[dayOfWeek] = day;
-
+    const days = updateSpots(true)
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then(() => {
         setState((prev) => ({
