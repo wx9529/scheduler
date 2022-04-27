@@ -13,7 +13,6 @@ export default function DayList(props) {
             selected={day.name === props.value}
             setDay={() => {
               props.setDay(day.name);
-              // dispatch(SET_DAY, day.name);
             }}
           />
         );

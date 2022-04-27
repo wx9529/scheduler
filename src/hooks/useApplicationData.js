@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 
 export default function useApplicationData() {
@@ -46,23 +46,23 @@ export default function useApplicationData() {
 
   const setDay = (day) => dispatch({ type: SET_DAY, value: day });
 
+  //helper function for updating spot
   function updateSpots(id, addspot) {
     const dayOfWeek = state.days.findIndex(item => item.name === state.day)
-    console.log('state', state);
     let day = {
       ...state.days[dayOfWeek]
     }
     if (!addspot) {
       if (!state.appointments[id].interview) {
-        //Add new appointment, spots - 1 
+        //we're adding an appointment, so spots - 1 
         day = {
           ...state.days[dayOfWeek],
           spots: state.days[dayOfWeek].spots - 1
         }
       }
-      //update appointment, spots remain unchange
+      //we're updating appointment, spots remain unchange
     } else {
-      //remove appointments, spots + 1 
+      //we're removing appointments, spots + 1 
       day = {
         ...state.days[dayOfWeek],
         spots: state.days[dayOfWeek].spots + 1
