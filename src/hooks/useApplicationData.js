@@ -82,12 +82,8 @@ export default function useApplicationData() {
 
     const connection = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
-    connection.onopen = () => connection.send("ping");
-
     connection.onmessage = function (e) {
-      console.log(e.data);
       const obj = JSON.parse(e.data);
-      console.log(obj);
       if (obj.type === SET_INTERVIEW) {
         dispatch({
           type: SET_INTERVIEW,
