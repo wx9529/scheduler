@@ -53,8 +53,8 @@ export default function useApplicationData() {
 
         return {
           ...state,
-          appointments: appointments,
-          days: days,
+          appointments,
+          days
         };
 
       default:
