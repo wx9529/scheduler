@@ -29,10 +29,8 @@ export default function useApplicationData() {
           ...state.appointments[action.value.id],
         };
 
-        let addSpot = false;
         if (!action.value.interview) {
           appointment.interview = null;
-          addSpot = true;
         } else {
           appointment.interview = { ...action.value.interview };
         }
