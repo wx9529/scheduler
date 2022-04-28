@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Interview Scheduler is a SPA (Single Page Application) for tracking students interviews built with the latest tools and techniques for optimized user experience. The App utilizes React built-in and custom hooks and allows users to add, edit and delete appointments in real time. Data is persisted by the API server using a PostgreSQL database. The client application communicates with an API server over HTTP, using the JSON format. For quality assurance, the project follows best practices of TDD (Test Driven Development), where individual Components are tested in isolation as well as End-to-End testing is performed.
+Interview Scheduler is a SPA (Single Page Application) for tracking students interviews built with the latest tools and techniques for optimized user experience. The App utilizes React built-in and custom hooks and allows users to add, edit and delete appointments in real time. Data is persisted by the API server using a PostgreSQL database. The client application communicates with an API server over HTTP, using the JSON format. The interview scheduler client application connects with a WebSocket server to allow for a realtime experience. For quality assurance, the project follows best practices of TDD (Test Driven Development), where individual Components are tested in isolation as well as End-to-End testing is performed.
 
 ## Project Features
 
@@ -16,7 +16,7 @@ Interview Scheduler is a SPA (Single Page Application) for tracking students int
 - Days display currently remaining spots and capture updates after each modification
 
 ## Project View
-
+WebSockets are supported in this application. Open a second browser window or tab to see changes made live!
 ![photo1](https://github.com/wx9529/scheduler/blob/master/docs/photo2.png?raw=true)
 ![photo2](https://github.com/wx9529/scheduler/blob/master/docs/photo3.png?raw=true)
 ![photo3](https://github.com/wx9529/scheduler/blob/master/docs/photo4.png?raw=true)
