@@ -6,7 +6,7 @@ import reducer, {
   SET_INTERVIEW
 } from "reducers/application";
 
-axios.defaults.baseURL = "http://localhost:8001";
+axios.defaults.baseURL = "https://interview-scheduler95.herokuapp.com";
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
