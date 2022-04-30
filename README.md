@@ -1,5 +1,11 @@
 # Interview Scheduler
 
+# Netlify Link
+
+https://production--super-macaron-02eb31.netlify.app
+
+The client connects with a WebSocket server to allow persistent connection, open a new client for a realtime experience. 
+
 ## Project Description
 
 Interview Scheduler is a SPA (Single Page Application) for tracking students interviews built with the latest tools and techniques for optimized user experience. The App utilizes React built-in and custom hooks and allows users to add, edit and delete appointments in real time. Data is persisted by the API server using a PostgreSQL database. The client application communicates with an API server over HTTP, using the JSON format. The interview scheduler client application connects with a WebSocket server to allow for a realtime experience. For quality assurance, the project follows best practices of TDD (Test Driven Development), where individual Components are tested in isolation as well as End-to-End testing is performed.
@@ -42,15 +48,13 @@ npm test
 ```sh
 npm run storybook
 ```
-## API server/Database Setup
+## API server/*Database
 
-For full functionality both must run concurrently: the client and the API server applications.
+The Server has been pushed to Heroku, it only supports three GET endpoints on the server. The / path will return a 404 error.
 
-- Start by forking and cloning the scheduler-api server [here](https://github.com/lighthouse-labs/scheduler-api)
-- Follow the steps outlined in README to install and setup the database
-- Fork and clone this repo
-- Navigate to the root directory and install dependencies with `npm install`
-- Once you have the database setup and the scheduler-api server running, run the following command from the root directory of the project `npm start`
+- https://interview-scheduler95.herokuapp.com/api/days
+- https://interview-scheduler95.herokuapp.com/api/appointments
+- https://interview-scheduler95.herokuapp.com/api/interviewers
 
 ## Project Stack
 
@@ -68,3 +72,16 @@ Testing: Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
 - React
 - React-dom
 - React-scripts
+- Babel/core
+- Storybook/addon-actions
+- Storybook/addon-backgrounds
+- Storybook/addon-links
+- Storybook/addons
+- Storybook/react
+- Testing-library/jest-dom
+- Testing-library/react
+- Testing-library/react-hooks
+- Babel-loader
+- Node-sass
+- Prop-types
+- React-test-renderer
